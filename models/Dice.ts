@@ -1,6 +1,6 @@
-import { Colour } from './Colour';
+import { Colour } from './Colour.enum';
 
-export class Player {
+export class Dice {
   name: string;
   colour: Colour;
   rolls: [];
