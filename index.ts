@@ -72,13 +72,21 @@ function drawPlayers() {
   }
 }
 
+function diceFunction(min, max) {
+  return Math.floor(Math.random() * max);
+  /*   return Math.random() * (max - min) + min; */
+}
+
 function rollDice() {
   //make it roll a 6 sided die, show the result in the created dice, and add the score to the player
   let selection: HTMLSelectElement = <HTMLSelectElement>(
     document.getElementById('playerSelector')
   );
-  Players[selection.value].score++;
-  console.log(Players[selection.value].score);
+  let outcome = diceFunction(1, 7);
+  playerRolls.push(outcome);
+  Players[selection.value].score += outcome;
+
+  updateStats();
 }
 
 function updateStats() {
@@ -86,7 +94,7 @@ function updateStats() {
     document.getElementById('rollList')
   );
   for (let i = 0; i < playerRolls.length; i++) {
-    rollList.innerHTML = '';
+    rollList.innerHTML += playerRolls[i].toString() + ' ';
   }
 }
 
