@@ -54,7 +54,14 @@ function changeColour() {
     document.getElementById('colourSelector')
   );
 
-  Players[selection.value].colour = colourSelection.value;
+  if ((colourSelection.value = '0')) {
+    Players[selection.value].colour = Colour.Red;
+  } else if ((colourSelection.value = '1')) {
+    Players[selection.value].colour = Colour.Pink;
+  } else if ((colourSelection.value = '2')) {
+    Players[selection.value].colour = Colour.Blue;
+  }
+  console.log(Players[selection.value].colour);
 
   updateDisplay();
 }
@@ -80,7 +87,7 @@ function rollDice() {
   let selection: HTMLSelectElement = <HTMLSelectElement>(
     document.getElementById('playerSelector')
   );
-  Players[selection.value].score = 2;
+  Players[selection.value].score++;
   console.log(Players[selection.value].score);
 }
 
