@@ -73,7 +73,7 @@ function drawPlayers() {
 }
 
 function diceFunction(min, max) {
-  return Math.floor(Math.random() * max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
   /*   return Math.random() * (max - min) + min; */
 }
 
@@ -82,14 +82,43 @@ function rollDice() {
   let selection: HTMLSelectElement = <HTMLSelectElement>(
     document.getElementById('playerSelector')
   );
-  let outcome = diceFunction(1, 7);
+  let outcome = diceFunction(1, 6);
   playerRolls.push(outcome);
   Players[selection.value].score += outcome;
+
+  if (Players[selection.value] === '0') {
+    Players[selection.value] = '1';
+  } else if (Players[selection.value] === '1') {
+    Players[selection.value] = '0';
+  }
 
   updateStats();
 }
 
 function updateStats() {
+  let selection: HTMLSelectElement = <HTMLSelectElement>(
+    document.getElementById('playerSelector')
+  );
+
+  //Current player
+  let currentPlayer: HTMLSelectElement = <HTMLSelectElement>(
+    document.getElementById('currentPlayer')
+  );
+  currentPlayer.innerHTML = 'Current player: ' + Players[selection.value].name;
+  //Player 1 total
+
+  let player1Total: HTMLSelectElement = <HTMLSelectElement>(
+    document.getElementById('player1Total')
+  );
+
+  player1Total.innerHTML = 'Player 1 total score: ' + Players[0].score;
+  //Player 2 total
+  let player2Total: HTMLSelectElement = <HTMLSelectElement>(
+    document.getElementById('player2Total')
+  );
+
+  player2Total.innerHTML = 'Player 2 total score: ' + Players[1].score;
+  //List of rolls
   let rollList: HTMLDivElement = <HTMLDivElement>(
     document.getElementById('rollList')
   );
