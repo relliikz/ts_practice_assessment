@@ -1,7 +1,7 @@
 <div id="app">
   <div id="playerInfo">
     <select id="playerSelector"></select>
-    <input id="diceColour-inp" />
+    <select id="colourSelector"></select>
   </div>
 
   <div id="buttonDiv">
@@ -10,13 +10,15 @@
 
   <div id="diceDiv">
     <div class="die" style="background-color: brown">1</div>
+    <div class="die" style="background-color: blue">30</div>
   </div>
 
   <div id="summaryDiv">
-    <p>Current player:</p>
-    <p>Player 1 total score:</p>
-    <p>Player 2 total score:</p>
-    <p>List of rolls:</p>
-    <p>Winner:</p>
+    <h1>Stats</h1>
+    <p id="currentPlayer">Current player:</p>
+    <p id="player1Total">Player 1 total score:</p>
+    <p id="player2Total">Player 2 total score:</p>
+    <p id="rollList">List of rolls:</p>
+    <p id="winner">Winner:</p>
   </div>
 </div>
