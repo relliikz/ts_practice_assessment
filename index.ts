@@ -3,6 +3,15 @@ import './style.css';
 import { Player } from './models/Player';
 import { Colour } from './models/Colour.enum';
 
+let Players: Player[] = [];
+let playerRolls: Number[] = [];
+
+//event listeners
+document.getElementById('rollDice').addEventListener('click', rollDice);
+document
+  .getElementById('changeColour-btn')
+  .addEventListener('click', changeColour);
+
 init();
 
 function init() {
@@ -11,8 +20,10 @@ function init() {
     document.getElementById('playerSelector')
   );
 
-  let player1: Player = new Player('Player 1', 0);
-  let player2: Player = new Player('Player 2', 0);
+  let player1: Player = new Player('Player 1', 0, Colour.Blue);
+  let player2: Player = new Player('Player 2', 0, Colour.Red);
+  Players.push(player1);
+  Players.push(player2);
 
   let option1: string = `<option value="0">${player1.name}</option>`;
   let option2: string = `<option value="1">${player2.name}</option>`;
@@ -30,8 +41,65 @@ function init() {
   colourSelector.innerHTML += colourOption1;
   colourSelector.innerHTML += colourOption2;
   colourSelector.innerHTML += colourOption3;
+
+  updateDisplay();
 }
 
-function changeColour() {}
+function changeColour() {
+  //make it apply the selected colour to the dice of the selected player
+  let selection: HTMLSelectElement = <HTMLSelectElement>(
+    document.getElementById('playerSelector')
+  );
+  let colourSelection: HTMLSelectElement = <HTMLSelectElement>(
+    document.getElementById('colourSelector')
+  );
 
-function rollDice(){}
+  Players[selection.value].colour = colourSelection.value;
+
+  updateDisplay();
+}
+
+function drawPlayers() {
+  let playerDiv: HTMLDivElement = <HTMLDivElement>(
+    document.getElementById('playerDiv')
+  );
+  playerDiv.innerHTML = '';
+  for (let index in Players) {
+    let newPlayer: HTMLDivElement = <HTMLDivElement>(
+      document.createElement('div')
+    );
+    newPlayer.className = 'player';
+    newPlayer.innerHTML = Players[index].score.toString();
+    newPlayer.style.backgroundColor = Players[index].colour;
+    playerDiv.appendChild(newPlayer);
+  }
+}
+
+function rollDice() {
+  //make it roll a 6 sided die, show the result in the created dice, and add the score to the player
+  let selection: HTMLSelectElement = <HTMLSelectElement>(
+    document.getElementById('playerSelector')
+  );
+  Players[selection.value].score = 2;
+  console.log(Players[selection.value].score);
+}
+
+function updateStats() {
+  for (let i = 0; i < playerRolls.length; i++) {}
+}
+
+function winGame() {
+  let winner: HTMLSelectElement = <HTMLSelectElement>(
+    document.getElementById('rollDice')
+  );
+
+  if (Players[0].score >= 20) {
+    winner.innerHTML = 'Winner: Player 1';
+  } else if (Players[1].score >= 20) {
+    winner.innerHTML = 'Winner: Player 2';
+  }
+}
+
+function updateDisplay() {
+  drawPlayers();
+}
