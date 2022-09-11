@@ -53,15 +53,18 @@ function changeColour() {
   let colourSelection: HTMLSelectElement = <HTMLSelectElement>(
     document.getElementById('colourSelector')
   );
+  let tempHold: string = '';
 
-  if ((colourSelection.value = '0')) {
+  tempHold = colourSelection.value;
+  if (tempHold === '0') {
     Players[selection.value].colour = Colour.Red;
-  } else if ((colourSelection.value = '1')) {
+  } else if (tempHold === '1') {
     Players[selection.value].colour = Colour.Pink;
-  } else if ((colourSelection.value = '2')) {
+  } else if (tempHold === '2') {
     Players[selection.value].colour = Colour.Blue;
   }
-  console.log(Players[selection.value].colour);
+
+  /*   Players[selection.value].colour = colourSelection.value; */
 
   updateDisplay();
 }
