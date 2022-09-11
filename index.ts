@@ -35,36 +35,23 @@ function init() {
     document.getElementById('colourSelector')
   );
 
-  let colourOption1: string = `<option value="0">${Colour.Red}</option>`;
-  let colourOption2: string = `<option value="1">${Colour.Pink}</option>`;
-  let colourOption3: string = `<option value="2">${Colour.Blue}</option>`;
-  colourSelector.innerHTML += colourOption1;
-  colourSelector.innerHTML += colourOption2;
-  colourSelector.innerHTML += colourOption3;
+  for (let item in Colour) {
+    let colourOption1: string = `<option>${item}</option>`;
+    colourSelector.innerHTML += colourOption1.toString();
+  }
 
   updateDisplay();
 }
 
 function changeColour() {
-  //make it apply the selected colour to the dice of the selected player
   let selection: HTMLSelectElement = <HTMLSelectElement>(
     document.getElementById('playerSelector')
   );
   let colourSelection: HTMLSelectElement = <HTMLSelectElement>(
     document.getElementById('colourSelector')
   );
-  let tempHold: string = '';
 
-  tempHold = colourSelection.value;
-  if (tempHold === '0') {
-    Players[selection.value].colour = Colour.Red;
-  } else if (tempHold === '1') {
-    Players[selection.value].colour = Colour.Pink;
-  } else if (tempHold === '2') {
-    Players[selection.value].colour = Colour.Blue;
-  }
-
-  /*   Players[selection.value].colour = colourSelection.value; */
+  Players[selection.value].colour = Colour[colourSelection.value];
 
   updateDisplay();
 }
@@ -95,7 +82,12 @@ function rollDice() {
 }
 
 function updateStats() {
-  for (let i = 0; i < playerRolls.length; i++) {}
+  let rollList: HTMLDivElement = <HTMLDivElement>(
+    document.getElementById('rollList')
+  );
+  for (let i = 0; i < playerRolls.length; i++) {
+    rollList.innerHTML = '';
+  }
 }
 
 function winGame() {
