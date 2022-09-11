@@ -122,14 +122,18 @@ function updateStats() {
   let rollList: HTMLDivElement = <HTMLDivElement>(
     document.getElementById('rollList')
   );
+
+  rollList.innerHTML = 'List of rolls: ';
   for (let i = 0; i < playerRolls.length; i++) {
     rollList.innerHTML += playerRolls[i].toString() + ' ';
   }
+
+  winGame();
 }
 
 function winGame() {
   let winner: HTMLSelectElement = <HTMLSelectElement>(
-    document.getElementById('rollDice')
+    document.getElementById('winner')
   );
 
   if (Players[0].score >= 20) {
