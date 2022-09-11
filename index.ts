@@ -93,6 +93,7 @@ function rollDice() {
   }
 
   updateStats();
+  updateDisplay();
 }
 
 function updateStats() {
@@ -125,7 +126,7 @@ function updateStats() {
 
   rollList.innerHTML = 'List of rolls: ';
   for (let i = 0; i < playerRolls.length; i++) {
-    rollList.innerHTML += playerRolls[i].toString() + ' ';
+    rollList.innerHTML += playerRolls[i].toString() + ' | ';
   }
 
   winGame();
