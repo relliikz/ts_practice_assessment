@@ -86,10 +86,10 @@ function rollDice() {
   playerRolls.push(outcome);
   Players[selection.value].score += outcome;
 
-  if (Players[selection.value] === '0') {
-    Players[selection.value] = '1';
-  } else if (Players[selection.value] === '1') {
-    Players[selection.value] = '0';
+  if (selection.selectedIndex === 0) {
+    selection.selectedIndex = 1;
+  } else {
+    selection.selectedIndex = 0;
   }
 
   updateStats();
